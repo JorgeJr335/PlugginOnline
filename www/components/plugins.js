@@ -15,17 +15,22 @@ $(document).on("click", "#beep", function(){
 $(document).on("click", "#vibrar", function(){
     navigator.vibrate([1000,1000,3000,1000,5000]);
 });
+
+function mostraMapa(lat, long){
+    L.mapquest.key = 'RG2UKVPkCFjakwHvGjgzSq4588Yz1BqR';
+
+        var map = L.mapquest.map('map', {
+          center: [lat, -long],
+          layers: L.mapquest.tileLayer('map'),
+          zoom: 12
+        });
+
+        map.addControl(L.mapquest.control());
+}
+
 $(document).on("click", "#local", function(){
     var onSuccess = function(position){
-      alert(
-      "Latitude: " + position.coords.latitude + '\n' +
-      "longitude: " + position.coords.longitude + '\n' +
-      "altitude: " + position.coords.altitude + '\n' +
-      "Precisão: " + position.coords.accuracy + '\n' +
-      "precisão de altitude: " + position.coords.altitudeAccuracy + '\n' +
-      "Título: " + position.coords.heading + '\n' +
-      "Velocidade: " + position.coords.speed + '\n' +
-      "Registro de Data: " + position.coords.timestamp);
+      mostraMapa(position.coords.latitude, position.coords.longitude);
     };
 
       function onError(error){
